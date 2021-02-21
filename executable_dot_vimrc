@@ -1,0 +1,45 @@
+" Be improved
+filetype plugin indent on
+syntax enable
+
+" Bootstrap plugin manager
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Plugin list
+call plug#begin()
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'kana/vim-textobj-entire'
+  Plug 'kana/vim-textobj-user'
+  Plug 'machakann/vim-highlightedyank'
+  Plug 'michaeljsmith/vim-indent-object'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-sleuth'
+  Plug 'tpope/vim-surround'
+  Plug 'vim-scripts/ReplaceWithRegister'
+call plug#end()
+
+" Shorten highlighted yank duration
+let g:highlightedyank_highlight_duration = 200
+
+" Misc
+set autowriteall
+set clipboard+=unnamed
+set hidden
+set ignorecase
+set mouse=a
+set number
+set relativenumber
+set scrolloff=5
+set smartcase
+
+" Fix yank
+nnoremap Y y$
+
+" Visual line navigation
+nnoremap j gj
+nnoremap k gk
