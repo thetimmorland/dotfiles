@@ -5,4 +5,4 @@ shopt -s no_empty_cmd_completion
 shopt -s histappend
 
 [ -f $HOME/.git-prompt.sh ] && source $HOME/.git-prompt.sh
-PROMPT_COMMAND='__git_ps1 "\w" "\\\$ "'
+PS1='[\W $(__git_ps1 " (%s)")\n\$ '
