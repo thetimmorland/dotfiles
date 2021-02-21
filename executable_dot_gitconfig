@@ -1,0 +1,15 @@
+[user]
+	name = Timothy Morland
+	email = me@timothy-morland.com
+[commit]
+	verbose = true
+[core]
+	excludesfile = /Users/tim/.gitignore_global
+[alias]
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit
+[push]
+	default = current
+[credential]
+	helper = osxkeychain
+[init]
+	defaultBranch = master
