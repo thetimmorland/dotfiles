@@ -1,18 +1,35 @@
-# /etc/bash/bashrc
-#
-# This file is sourced by all *interactive* bash shells on startup,
-# including some apparently interactive shells such as scp and rcp
-# that can't tolerate any output.  So make sure this doesn't display
-# anything or bad things will happen !
+[ -z "$PS1" ] && return
 
+Black='\[\033[0;30m\]'
+Red='\[\033[0;31m\]'
+Green='\[\033[0;32m\]'
+Yellow='\[\033[0;33m\]'
+Blue='\[\033[0;34m\]'
+Purple='\[\033[0;35m\]'
+Cyan='\[\033[0;36m\]'
+White='\[\033[0;37m\]'
+Light_Gray='\[\033[0;37m\]'
 
-# Test for an interactive shell.  There is no need to set anything
-# past this point for scp and rcp, and it's important to refrain from
-# outputting anything in those cases.
-if [[ $- != *i* ]] ; then
-	# Shell is non-interactive.  Be done now!
-	return
-fi
+# Reset colors
+NONE='\[\033[0;0m\]'
+
+function parse_git_branch {
+    git branch 2>/dev/null | grep '^*' | sed 's_^..__' | sed 's_\(.*\)_(\1)_'
+}
+
+# When in a git repo, this method is used to determine if there are changes
+function git_dirty {
+  if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
+    echo "!"
+  else
+    echo ""
+  fi
+}
+
+ps1_dir="$Purple\w$NONE"
+ps1_git="$Cyan \$(parse_git_branch)$Red \$(git_dirty)$NONE "
+
+export PS1="${ps1_dir}${ps1_git}\$ "
 
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
